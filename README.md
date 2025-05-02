@@ -8,6 +8,18 @@ It also support [C3 paging mode](http://norecess.cpcscene.net/advancedmemoryusag
 
 Legacy software that supports the DK'Tronics memory standard will be able to access up to 576K of RAM ([the maximum suppored by DK'Tronics](https://www.cpcwiki.eu/index.php/Standard_Memory_Expansions#Standard_128K-512K_Expansions_.28dk.27tronics.2Fdobbertin-style.29)). More recent software, like e.g. SymbOS, with support for the [enhanced Yarek/RAM7 standard](https://www.cpcwiki.eu/index.php/Standard_Memory_Expansions#Extended_1M-4M_Expansions_.28RAM7.2FYarek-style.29) will see the full 1024K. 
 
+## Variations
+
+The same PCB supports 3 RAM configurations: 
+
+- total of 1024K RAM (the primary config): 2x 512K SRAM, C3 support
+- total of 640K RAM: 1x 512K SRAM + 1x 128K SRAM, total 640K RAM, C3 support
+- total of 576K, 1x 512K SRAM, <b>no C3</b>
+
+<sup>For the 640K version a small cut has to be made on the bottom of the PCB (clearly indicated) and another resistor is required. For the 576K version you just need to close some bridges on the PCB and can save a few € as you only need 1 SRAM and 2 CPLD ICs.</sup>
+
+(Personal comment: The 640K actually only makes sense if you have a 128K SRAM lying around. The price difference if you buy new is negligible.) 
+
 ## Goals
 
 Main goals of this expansions were:
@@ -61,13 +73,15 @@ For a full assembly you need
 | PCB | n/a | x1 |
 | ATF16V8 | 556-AF16V8B15PU | x3 |
 | 74HCT174 or 74LS174 | 595-CD74HCT174E | x1 |
-| AS6C4008-55 | 913-AS6C4008-55PIN | x2 |
+| AS6C4008-55 (*) | 913-AS6C4008-55PIN | x2 |
 | Capacitor 100nF 104 2.56mm | 581-AR155C104K4R | x5 |
 | Capacitor 10uF (or 22uF) - 2.0mm | e.g. 598-106SVF025M  | x1 |
 | Resistor 4.7k | | x1 |
 | IC socket 40pin | 571-1-2199299-5 | x1 |
 | Pin Header 1x20 | e.g. 517-2320-6121 (normal)<br>or  200-TS120TAA (precise)| x2 |
 | optional:<br>Pin Header 1x2 angled<br>or JST XH 2.5mm Pin male right angle| 538-90121-0122 <br>JST: 306-S2B-XH-ALFSN | x1 |
+
+<sup>*: AS6C4008 or compatible. If you are building the 640K version, the second SRAM can be a AS6C1008 (or compatible)</sup>
 
 TODO: add ic sockets
 
@@ -121,7 +135,7 @@ Solder all IC sockets on top of the PCB.
 
 <img src="/pictures/assembly2.jpg" width="640"/>
 
-<sup>In case you are assembling the 576K version with a single SRAM you can leave out the sockets for PAL3 and SRAM2.</sup> 
+<sup>In case you are assembling the 576K version with a single SRAM you can leave out the sockets for PAL3 and SRAM2. However it's recommended to fit them now for an easier, later upgrade.</sup> 
 
 **Step 3:**
 
@@ -145,7 +159,10 @@ Gently remove the CPU from its socket on the CPC motherboard and insert it into 
 Turn on the CPC - and enjoy!
 
 > [!NOTE]
-> The CPCs boot message is hard coded in ROM so it will continue to show "128K". To test the expansion you can e.g. use the [Amstrad diagnostics](https://github.com/llopis/amstrad-diagnostics).
+> The CPCs boot message is hard coded in ROM so it will continue to show "64K". To test the expansion you can e.g. use the [Amstrad diagnostics](https://github.com/llopis/amstrad-diagnostics).
+
+## Variations
+
 
 ## Thanks
 
