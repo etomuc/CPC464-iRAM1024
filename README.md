@@ -8,6 +8,11 @@ It also support [C3 paging mode](http://norecess.cpcscene.net/advancedmemoryusag
 
 Legacy software that supports the DK'Tronics memory standard will be able to access up to 576K of RAM ([the maximum suppored by DK'Tronics](https://www.cpcwiki.eu/index.php/Standard_Memory_Expansions#Standard_128K-512K_Expansions_.28dk.27tronics.2Fdobbertin-style.29)). More recent software, like e.g. SymbOS, with support for the [enhanced Yarek/RAM7 standard](https://www.cpcwiki.eu/index.php/Standard_Memory_Expansions#Extended_1M-4M_Expansions_.28RAM7.2FYarek-style.29) will see the full 1024K. 
 
+> [!IMPORTANT]
+> This version will properly work only in the Amstrad CPC 464 and 664. It will not work in the Amstrad Plus and GX4000 models and can potentially cause harm to them.
+>
+> It also won't fit into the CPC6128 but there is a special CPC6128 version (iRAM/640 and in the future also iRAM/1088). See other projects on this Github profile. 
+
 ## Variations
 
 The same PCB supports 3 RAM configurations: 
@@ -29,7 +34,7 @@ Main goals of this expansions were:
 - DIY friendly
 	- all easy-to solder through-hole components
 	- no FPGA, CPLDs can be programmed with many cheap EPROM programmers
-- cheap - all components should be available for €20 or less
+- cheap - all components should be available for €20 or less in total
 - long-term availability - all components are still manufactured and will probably be available for decades (at least as NOS)
 
 ## License
@@ -55,7 +60,7 @@ For a full assembly you need
 >**USE AT YOUR OWN RISK.**
 >
 >This is a hobby project, I am a hobbyist and no engineer. There is always the risk that the expansion can cause harm to your CPC. 
->Although I have tested the expansion on several CPCs for many hours with many other expansions and lots of software, there is no guarantee that it will properly work under all circumstances, with all expansions or with all revisions of the CPC 6128.
+>Although I have tested the expansion on several CPCs for many hours with many other expansions and lots of software, there is no guarantee that it will properly work under all circumstances, with all expansions or with all revisions of the CPC 464 / 664.
 >
 > Especially if you are building this for others (commercially or not) make sure to make your own intense tests to guarentee this expansion works as expected before handing over to the recipients.  
 >
@@ -71,19 +76,24 @@ For a full assembly you need
 | Part | Mouser No. (example, not verified yet) | Quantity |
 | --- | --- | --- |
 | PCB | n/a | x1 |
-| ATF16V8 | 556-AF16V8B15PU | x3 |
+| ATF16V8 (**) | 556-AF16V8B15PU | x3 |
 | 74HCT174 or 74LS174 | 595-CD74HCT174E | x1 |
 | AS6C4008-55 (*) | 913-AS6C4008-55PIN | x2 |
-| Capacitor 100nF 104 2.56mm | 581-AR155C104K4R | x5 |
+| Capacitor 100nF 104 2.56mm | 581-AR155C104K4R | x6 |
 | Capacitor 10uF (or 22uF) - 2.0mm | e.g. 598-106SVF025M  | x1 |
-| Resistor 4.7k | | x1 |
-| IC socket 40pin | 571-1-2199299-5 | x1 |
+| Resistor 10k(***)<br>(4k7 will also be fine) | | x1 |
+| IC socket 40pin | 737-ICS-640-T | x1 |
+| IC socket 32pin (**) | 737-ICS-632-T | x2 |
+| IC socket 20pin (**) | 737-ICS-320-T | x3 |
+| IC socket 16pin | 737-ICS-316-T | x1 |
 | Pin Header 1x20 | e.g. 517-2320-6121 (normal)<br>or  200-TS120TAA (precise)| x2 |
 | optional:<br>Pin Header 1x2 angled<br>or JST XH 2.5mm Pin male right angle| 538-90121-0122 <br>JST: 306-S2B-XH-ALFSN | x1 |
 
-<sup>*: AS6C4008 or compatible. If you are building the 640K version, the second SRAM can be a AS6C1008 (or compatible)</sup>
+<sup>\*: AS6C4008 or compatible. If you are building the 640K version, the second SRAM can be a AS6C1008 (or compatible). If you are building the 576K version, the second SRAM is not needed. </sup>
 
-TODO: add ic sockets
+<sup>\**: If you are building the 576K version only 2x ATF16V8, 1x 32pin socket and 2x 20pin socket is required. However it's still recommended to populate the sockets to ensure an easy upgrade later.</sup>
+
+<sup>\***: 2x resistor if you are building the 640K version</sup> 
 
 
 Order List from Reichelt/Germany: https://www.reichelt.de/my/2247546 (list not verfified yet, please let me know if this works out for you).
