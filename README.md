@@ -76,15 +76,15 @@ For a full assembly you need
 | Part | Mouser No. (example, not verified yet) | Quantity |
 | --- | --- | --- |
 | PCB | n/a | x1 |
-| ATF16V8 (**) | 556-AF16V8B15PU | x3 |
+| ATF16V8 <sup>**</sup> | 556-AF16V8B15PU | x3 |
 | 74HCT174 or 74LS174 | 595-CD74HCT174E | x1 |
-| AS6C4008-55 (*) | 913-AS6C4008-55PIN | x2 |
+| AS6C4008-55 <sup>*</sup> | 913-AS6C4008-55PIN | x2 |
 | Capacitor 100nF 104 2.56mm | 581-AR155C104K4R | x6 |
 | Capacitor 10uF (or 22uF) - 2.0mm | e.g. 598-106SVF025M  | x1 |
-| Resistor 10k(***)<br>(4k7 will also be fine) | | x1 |
+| Resistor 10k<sup>***</sup><br>(4k7 will also be fine) | | x1 |
 | IC socket 40pin | 737-ICS-640-T | x1 |
-| IC socket 32pin (**) | 737-ICS-632-T | x2 |
-| IC socket 20pin (**) | 737-ICS-320-T | x3 |
+| IC socket 32pin <sup>**</sup> | 737-ICS-632-T | x2 |
+| IC socket 20pin <sup>**</sup> | 737-ICS-320-T | x3 |
 | IC socket 16pin | 737-ICS-316-T | x1 |
 | Pin Header 1x20 | e.g. 517-2320-6121 (normal)<br>or  200-TS120TAA (precise)| x2 |
 | optional:<br>Pin Header 1x2 angled<br>or JST XH 2.5mm Pin male right angle| 538-90121-0122 <br>JST: 306-S2B-XH-ALFSN | x1 |
