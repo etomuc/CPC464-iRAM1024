@@ -96,9 +96,9 @@ For a full assembly you need
 <sup>\***: 2x resistor if you are building the 640K version</sup> 
 
 
-Order List from Reichelt/Germany: https://www.reichelt.de/my/2247546 (list not verfified yet, please let me know if this works out for you).
+Order List from Reichelt/Germany: https://www.reichelt.de/my/2256222 (list not verfified yet, please let me know if this works out for you).
 
-List is for 6128 version. Please adjust the number of components to match the required amount. 
+List for 1024MB version. Please adjust the components if you plan to build the 640K or 576K version. 
 ​ 
 
 > [!IMPORTANT]
