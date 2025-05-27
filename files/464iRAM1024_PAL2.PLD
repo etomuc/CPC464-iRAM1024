@@ -1,0 +1,114 @@
+Name     464iRAM_1024_PAL2_v1r1 ;
+PartNo   00 ;
+Date     07.04.2025 ;
+Revision 01 ;
+Designer Eto ;
+Company  BlueGenie;
+Assembly None ;
+Location  ;
+Device   g16v8a ;
+
+
+/* working C3
+
+
+                              |464iRAM_1024_P|
+                    nRFSH x---|1           20|---x Vcc                      
+                      A14 x---|2           19|---x C3                       
+                    HIROM x---|3           18|---x nMREQ                    
+                    LOROM x---|4           17|---x ROMACCESS                
+                      A15 x---|5           16|---x EXPRAM                   
+                       Q1 x---|6           15|---x OUT14                    
+                       Q0 x---|7           14|---x OUT15                    
+                  ENABLED x---|8           13|---x OUTM                     
+                       Q2 x---|9           12|---x nCE                      
+                      GND x---|10          11|---x nRD                      
+                              |______________|
+
+
+
+ */
+
+/* *************** INPUT PINS *********************/
+
+PIN  1 = nRFSH;
+PIN  2 = A14;
+PIN  3 = HIROM;
+PIN  4 = LOROM;
+PIN  5 = A15;
+
+Pin  6 = Q1;
+PIN  7 = Q0;
+PIN  8 = ENABLED;
+PIN  9 = Q2;
+PIN 11 = nRD;
+PIN 18 = nMREQ;
+
+
+/* *************** OUTPUT PINS *********************/
+
+PIN  12 = nCE;
+PIN  13 = OUTM;
+PIN  14 = OUT15;
+PIN  15 = OUT14;
+PIN  16 = EXPRAM;
+PIN  17 = ROMACCESS;
+PIN  19 = C3;
+
+
+OUTM  = !( !nMREQ & !ENABLED 
+        #  !nMREQ & !nRFSH  
+        #  !nMREQ & !EXPRAM
+);
+
+
+/*
+nCE =  !(  !nMREQ & nRD & nRFSH                   & ENABLED
+        #  !nMREQ & !ROMACCESS &  !nRD & EXPRAM   & ENABLED
+);
+*/
+
+nCE =   !( !nMREQ & nRFSH & !ROMACCESS &  EXPRAM & ENABLED);
+
+
+/* SRAM is active if C3  emulation is on:
+1) C3 active: ALL writes incl. base ram go to SRAM (incl. mirroring of base ram)
+2+3) C3 active:  ALL reads from base RAM from $4000-$FFFF go to SRAM 
+(ignoring actual contents of base ram via OUTM logic)
+reads from 0-$3FFF will be coming from base ram 
+(required to ensure we pass through reads to firmware during 
+boot phase where we don't know that is actual ROM access)
+4) all reads from EXPRAM come from SRAM (C3 irrelevant)
+5) C3 inactive: only writes to EXPRAM will go to SRAM
+*/
+
+OUT14 = ! ( !A14
+       # !A15 & Q2 & !Q0 & !nMREQ & !nRD         & ENABLED
+       # !A15 & Q2 & !Q0 & !nMREQ &  nRD & nRFSH & ENABLED);
+
+
+OUT15 = (  A15
+     # !A15 & A14 &  Q2 & Q1       & !nMREQ & !nRD         & ENABLED
+     # !A15 & A14 &  Q2 & Q1       & !nMREQ &  nRD & nRFSH & ENABLED
+); 
+
+
+/*C3 = !nMREQ & nRFSH & !A15 & A14 & !Q2 & Q1 & Q0 & ENABLED;
+*/
+
+C3 = nRFSH & !A15 & A14 & !Q2 & Q1 & Q0 & ENABLED;
+
+EXPRAM =  ( !A15  &  A14               &  Q2              & ENABLED
+          #  A15  &  A14 & Q0          & !Q2 & !ROMACCESS & ENABLED
+          #               !Q0    & Q1  & !Q2 & !ROMACCESS & ENABLED
+);
+
+ROMACCESS =   !nMREQ & !nRD & LOROM & !A14 & !A15
+            # !nMREQ & !nRD & HIROM &  A14 &  A15;
+
+
+
+
+
+
+

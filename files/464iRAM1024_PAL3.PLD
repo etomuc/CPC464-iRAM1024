@@ -1,0 +1,104 @@
+Name     464iRAM_1024_PAL3_v2r1 ;
+PartNo   00 ;
+Date     07.04.2025 ;
+Revision 01 ;
+Designer Eto ;
+Company  BlueGenie;
+Assembly None ;
+Location  ;
+Device   g16v8a ;
+
+/* version passend fuer 464 und 664 , komisches Layout */
+
+/*
+
+                               ______________
+                              |464iRAM_1024_P|
+                       C3 x---|1           20|---x Vcc                      
+                  A15pal2 x---|2           19|---x A15out                   
+                      nCE x---|3           18|---x nCE1                     
+                nMREQpal2 x---|4           17|---x nMREQout                 
+                       Q6 x---|5           16|---x A17                      
+                      nRD x---|6           15|---x nCE2                     
+                       Q4 x---|7           14|---x nRDout                   
+                       Q5 x---|8           13|---x A16                      
+                       Q3 x---|9           12|---x A18                      
+                      GND x---|10          11|---x 640K                     
+                              |______________|
+*/
+
+/* *************** INPUT PINS *********************/
+
+
+PIN  1 = C3;
+PIN  2 = A15pal2;
+PIN  3 = nCE;
+PIN  4 = nMREQpal2;
+PIN  5 = Q6;
+PIN  6 = nRD;
+PIN  7 = Q4;
+PIN  8 = Q5;
+PIN  9 = Q3;
+PIN 11 = 640K;
+
+/* *************** OUTPUT PINS *********************/
+
+PIN 12 = A18;
+PIN 13 = A16;
+PIN 14 = nRDout;
+PIN 15 = nCE2;
+PIN 16 = A17;
+PIN 17 = nMREQout;
+PIN 18 = nCE1;
+PIN 19 = A15out;
+
+
+
+nCE1 = !( !nCE &  Q6 & !C3);
+
+
+nCE2 = !( !nCE & !Q6 & !C3
+	    # nCE & !nMREQpal2 &  nRD
+	    # nCE & !nMREQpal2 & !nRD & C3 ) ;
+
+
+A15out = A15pal2
+	#  nCE & C3 & !nMREQpal2;
+/* OKAY??? */
+
+A16 =     nCE
+        # !C3 & Q3 & !Q4 &  Q5 & !640K
+        # !C3 & Q3 &  Q4 & !Q5 & !640K
+        # !C3 & Q3 & !Q4 & !Q5 & !640K
+;
+
+A17 =     nCE  
+	 # 640K
+        # !C3 & Q4 & !Q3 &  Q5 & !640K
+        # !C3 & Q4 &  Q3 & !Q5 & !640K
+        # !C3 & Q4 & !Q3 & !Q5 & !640K
+;
+
+A18 =     nCE & !640K
+        # !C3 & Q5 & !Q3 &  Q4 & !640K
+        # !C3 & Q5 &  Q3 & !Q4 & !640K
+        # !C3 & Q5 & !Q3 & !Q4 & !640K
+;
+
+nMREQout = !( !nMREQpal2 & nRD
+	     # !nMREQpal2 & !nRD & !C3);
+
+nRDout   = ! (!nRD & nMREQpal2 
+	 	# !nMREQpal2 & !nRD & !C3);
+
+
+
+
+
+
+
+
+
+
+
+

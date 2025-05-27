@@ -1,0 +1,79 @@
+Name     464iRAM_1024_PAL1_v1r1 ;
+Date     23.03.2025 ;
+PartNo   00 ;
+Revision 01 ;
+Designer Eto ;
+Company  BlueGenie;
+Assembly None ;
+Location ;
+Device   g16v8a ;
+
+/*
+
+                               ______________
+                              |464iRAM_1024_P|
+                   nRESET x---|1           20|---x Vcc                      
+                    nIORQ x---|2           19|---x                          
+                       D7 x---|3           18|---x HIROM                    
+                       D6 x---|4           17|---x LOROM                    
+                       A8 x---|5           16|---x A15                      
+                          x---|6           15|---x nWR                      
+                  ENABLED x---|7           14|---x Q6                       
+                       D2 x---|8           13|---x StorePaging              
+                          x---|9           12|---x                          
+                      GND x---|10          11|---x D3                       
+                              |______________|
+
+*/
+
+/* *************** INPUT PINS *********************/
+PIN   1 = nRESET ;  
+PIN   2 = nIORQ ;
+PIN   3 = D7 ; 
+PIN   4 = D6 ; 
+PIN   5 = A8;
+/*PIN   6 = EXPRAM;*/
+PIN   7 = ENABLED;
+PIN   8 = D2 ; 
+
+PIN  11 = D3 ; 
+PIN  15 = nWR;
+PIN  16 = A15 ;
+
+
+
+/* *************** OUTPUT PINS *********************/
+
+
+PIN 13 = StorePaging;
+PIN 14 = Q6 ;  
+PIN 17 = LOROM ; 
+PIN 18 = HIROM ; 
+
+
+
+StorePaging = D6 & D7 & !A15 & !nIORQ & !nWR & ENABLED ;
+
+Q6 =  nRESET &  StorePaging & A8 
+    # nRESET & !StorePaging & Q6;
+
+LOROM     = (   nRESET & D7     & !D6   & !A15  & !nIORQ    & !nWR  & !D2
+            #   nRESET & !D7                                                & LOROM
+            #   nRESET          &  D6                                       & LOROM
+            #   nRESET                  &  A15                              & LOROM
+            #   nRESET                          & nIORQ                     & LOROM
+            #   nRESET                                      & nWR           & LOROM);
+            
+HIROM     = (   nRESET & D7     & !D6   & !A15  & !nIORQ    & !nWR  & !D3
+            #   nRESET & !D7                                                & HIROM
+            #   nRESET          &  D6                                       & HIROM
+            #   nRESET                  &  A15                              & HIROM
+            #   nRESET                          & nIORQ                     & HIROM
+            #   nRESET                                      & nWR           & HIROM);
+            
+
+
+
+
+
+
