@@ -4,7 +4,7 @@ The iRAM/1024 is an internal RAM expansion for the Amstrad CPC 464 and CPC 664 w
 
 It also support [C3 paging mode](http://norecess.cpcscene.net/advancedmemoryusage.html) which allows you to run CP/M plus, FutureOS or some games and demos with C3 requirement (e.g Pac-Man emulator or the demos PHX and Phortem).
 
-<img src="/pictures/Iram1024_builtin.jpg" width="640"/>
+<img src="/pictures/installed464board1.jpg" width="640"/>
 
 Legacy software that supports the DK'Tronics memory standard will be able to access up to 576K of RAM ([the maximum suppored by DK'Tronics](https://www.cpcwiki.eu/index.php/Standard_Memory_Expansions#Standard_128K-512K_Expansions_.28dk.27tronics.2Fdobbertin-style.29)). More recent software, like e.g. SymbOS, with support for the [enhanced Yarek/RAM7 standard](https://www.cpcwiki.eu/index.php/Standard_Memory_Expansions#Extended_1M-4M_Expansions_.28RAM7.2FYarek-style.29) will see the full 1024K. 
 
@@ -83,9 +83,9 @@ For a full assembly you need
 | Capacitor 10uF (or 22uF) - 2.0mm | e.g. 598-106SVF025M  | x1 |
 | Resistor 10k<sup>***</sup><br>(4k7 will also be fine) | | x1 |
 | IC socket 40pin | 737-ICS-640-T | x1 |
-| IC socket 32pin <sup>**</sup> | 737-ICS-632-T | x2 |
-| IC socket 20pin <sup>**</sup> | 737-ICS-320-T | x3 |
-| IC socket 16pin | 737-ICS-316-T | x1 |
+| optional:<br>IC socket 32pin <sup>**</sup> | 737-ICS-632-T | x2 |
+| optional:<br>IC socket 20pin <sup>**</sup> | 737-ICS-320-T | x3 |
+| optional:<br>IC socket 16pin | 737-ICS-316-T | x1 |
 | Pin Header 1x20 | e.g. 517-2320-6121 (normal)<br>or  200-TS120TAA (precise)| x2 |
 | optional:<br>Pin Header 1x2 angled<br>or JST XH 2.5mm Pin male right angle| 538-90121-0122 <br>JST: 306-S2B-XH-ALFSN | x1 |
 
@@ -106,8 +106,17 @@ List for 1024MB version. Please adjust the components if you plan to build the 6
 >
 > 1x20 Pin Header: normal pin headers put some strain on the socket. Especially if you plan to remove the expansion again, consider the precise pin headers. However those break easily when not put into the socket gently and perfectly aligned. 
 
-<img src="/pictures/bom.jpg" width="640"/>
+<img src="/pictures/build1.jpg" width="640"/>
 
+1. PCB
+2. 2x SRAM AS6C4008 (DIP)
+3. 6x Cap 100nF 104 2.5mm
+4. 3x ATF16V8 (DIP)
+5. 74HCT174 or 74LS174
+6. Resistor 10k or 4.7k
+7. IC Socket 40pin
+8. 2x Pin Header 1x20 (2.54mm)
+9. Cap 22uF or 10uF, 2.5mm, height: 5-7mm
 
 ### PCB
 
@@ -120,7 +129,7 @@ or use the Gerber files from the files folder to order from your preferred PCB m
 
 Preparations:
 
-1) Some pin headers need to be adjusted slightly as usually one side of the pin headers is too short and the other too long. You can move the plastic bar with e.g. pliers easily. Move them until the plastic bar almost reaches the mid of the pin header. One side should be slightly shorter than the other side. The short side will be the one that is later plugged into the CPU socket on the motherboard.
+1) Some pin headers (thosw without round pins) usually need to be adjusted slightly as one side of the pin headers is too short and the other too long. You can move the plastic bar with e.g. pliers easily. Move them until the plastic bar almost reaches the mid of the pin header. One side should be slightly shorter than the other side. The short side will be the one that is later plugged into the CPU socket on the motherboard.
 
 2) Program the ATF16V8 CPLDs with your programmer. Make sure to mark each one so you can later identify PAL1, PAL2 and PAL3.
 
@@ -128,11 +137,13 @@ Preparations:
 
 **Step 1:**
 
-Add the resistor on the bottom side of the PCB. 
+Add the pin header on the bottom side of the PCB. 
 
-<img src="/pictures/assembly1.jpg" width="640"/>
+<img src="/pictures/build2.jpg" width="640"/>
 
 <sup>In case you are assembling the 640K version make sure to cut the trace at the indicated position and add the additional 10K resistor.</sup> 
+
+<sup>In case you are assembling the 576K version with a single SRAM make sure to close all the L-bridges (L1 to L4).</sup>
 
 > [!TIP]
 > To easily align the pin headers you can insert them into the CPU socket before soldering. This keeps them nicely in place and aligned.
@@ -141,38 +152,59 @@ Cut the pins of the pin header on the top of the PCB closely to the PCBs surface
 
 **Step 2:**
 
-Solder all IC sockets on top of the PCB.
+If you are not using sockets, solder all ICs first, then the CPU socket. If you are using sockets for all ICs, just solder all sockets. After that, solder the remaining components on top (resistor and caps). 
 
-<img src="/pictures/assembly2.jpg" width="640"/>
+<img src="/pictures/build3.jpg" width="640"/>
 
-<sup>In case you are assembling the 576K version with a single SRAM you can leave out the sockets for PAL3 and SRAM2. However it's recommended to fit them now for an easier, later upgrade.</sup> 
-
-**Step 3:**
-
-Solder the remaining components on top of the PCB. 
-
-<img src="/pictures/assembly3.jpg" width="640"/>
-
-<sup>In case you are assembling the 576K version with a single SRAM make sure to close all the L-bridges (L1 to L4).</sup> 
+<sup>In case you are assembling the 576K version with a single SRAM you can leave out the sockets/ICs for PAL3 and SRAM2. However if you are using sockets it's recommended to fit them now for an easier, later upgrade.</sup> 
 
 > [!IMPORTANT]
 > Due to the tight packing of all components it's easy to accidentally add shorts or create a cold solder joint. Be careful when soldering and better check all connections twice. 
 
+**Step 3:**
+
+If you have been using sockets not put the new ICs into their respective sockets (except for CPU). 
+
 **Step 4:**
 
-Put the new ICs into their respective sockets. 
+Gently remove the CPU from its socket on the CPC motherboard.
 
-**Step 5:**
+<img src="/pictures/install1.jpg" width="640"/>
 
-Gently remove the CPU from its socket on the CPC motherboard and insert it into the CPU socket on the expansion. Now insert the expansion into the CPU socket on the motherboard (also gently, but usually needs a bit of force to properly snap into the socket).
+Insert it into the CPU socket on the expansion. 
+
+<img src="/pictures/install2.jpg" width="640"/>
+
+Now insert the expansion into the CPU socket on the motherboard. If any capacitors are blocking then gently bend them towards the motherboard until they no longer touch the expansion PCB. 
+
+<img src="/pictures/install3.jpg" width="640"/>
+ 
+Push the expansion into the socket until it sits tight. This usually needs a bit of force (GENTLY!) to properly snap in.
+
+<img src="/pictures/installed464board1.jpg" width="640"/>
 
 Turn on the CPC - and enjoy!
 
 > [!NOTE]
 > The CPCs boot message is hard coded in ROM so it will continue to show "64K". To test the expansion you can e.g. use the [Amstrad diagnostics](https://github.com/llopis/amstrad-diagnostics).
 
-## Variations
+### CPC 464 - board revision 3 
 
+If your CPC 464 has [motherboard revision 3](https://www.cpcwiki.eu/index.php/Mainboard_Versions#CPC464_version_3_.28medium-sized.29) (joystik port on the left) with Gate Array 40007 the cooling plate of the Gate Array blocks the installation of the iRAM 464. In this case you can bend the blocking edge slightly upwards to make it fit. 
+
+<img src="/pictures/installed464board3.jpg" width="640"/>
+
+### CPC 664
+
+The board will fit into the CPC 664 without modifications.
+
+<img src="/pictures/installed664.jpg" width="640"/>
+
+
+
+
+
+## Variations
 
 ## Thanks
 
