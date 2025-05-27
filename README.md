@@ -165,7 +165,7 @@ If you are not using sockets, solder all ICs first, then the CPU socket. If you 
 
 If you have been using sockets not put the new ICs into their respective sockets (except for CPU). 
 
-**Step 4:**
+## Installation
 
 Gently remove the CPU from its socket on the CPC motherboard.
 
