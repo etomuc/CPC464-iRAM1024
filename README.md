@@ -11,7 +11,7 @@ Legacy software that supports the DK'Tronics memory standard will be able to acc
 > [!IMPORTANT]
 > This version will properly work only in the Amstrad CPC 464 and 664. It will not work in the Amstrad Plus and GX4000 models and can potentially cause harm to them.
 >
-> It also won't fit into the CPC6128 but there is a special CPC6128 version (iRAM/640 and in the future also iRAM/1088). See other projects on this Github profile. 
+> It also won't fit into the CPC6128 but there is a special CPC6128 version (iRAM/640 and also iRAM/1088). See other projects on this Github profile. 
 
 ## Variations
 
@@ -21,9 +21,9 @@ The same PCB supports 3 RAM configurations:
 - total of 640K RAM: 1x 512K SRAM + 1x 128K SRAM, total 640K RAM, C3 support
 - total of 576K, 1x 512K SRAM, <b>no C3</b>
 
-<sup>For the 640K version a small cut has to be made on the bottom of the PCB (clearly indicated) and another resistor is required. For the 576K version you just need to close some bridges on the PCB and can save a few € as you only need 1 SRAM and 2 CPLD ICs.</sup>
+<sup>For the 640K version a small cut has to be made on the bottom of the PCB (clearly indicated) and a second resistor is required. For the 576K version you just need to close some bridges on the PCB and can save a few € as you only need 1 SRAM and 2 CPLD ICs.</sup>
 
-(Personal comment: The 640K actually only makes sense if you have a 128K SRAM lying around. The price difference if you buy new is negligible.) 
+(Personal comment: The 640K actually only makes sense if you have a 128K SRAM lying around. Otherwise the price difference between 512K and 128K is negligible.) 
 
 ## Goals
 
@@ -104,7 +104,7 @@ List for 1024MB version. Please adjust the components if you plan to build the 6
 > [!IMPORTANT]
 > Make sure to buy all ICs in DIP format.
 >
-> 1x20 Pin Header: normal pin headers put some strain on the socket. Especially if you plan to remove the expansion again, consider the precise pin headers. However those break easily when not put into the socket gently and perfectly aligned. 
+> 1x20 Pin Header: normal pin headers put some strain on the socket. Especially if you plan to remove the expansion again, consider the precise pin headers. However those break more easily, especially when not put into the socket gently and straight. 
 
 <img src="/pictures/build1.jpg" width="640"/>
 
@@ -190,7 +190,7 @@ Turn on the CPC - and enjoy!
 
 ### CPC 464 - board revision 3 
 
-If your CPC 464 has [motherboard revision 3](https://www.cpcwiki.eu/index.php/Mainboard_Versions#CPC464_version_3_.28medium-sized.29) (joystik port on the left) with Gate Array 40007 the cooling plate of the Gate Array blocks the installation of the iRAM 464. In this case you can bend the blocking edge slightly upwards to make it fit. 
+If your CPC 464 has [motherboard revision 3](https://www.cpcwiki.eu/index.php/Mainboard_Versions#CPC464_version_3_.28medium-sized.29) (joystick port on the left) with Gate Array 40007 the cooling plate of the Gate Array blocks the installation of the iRAM 464. In this case you can bend the blocking edge slightly upwards to make it fit. 
 
 <img src="/pictures/installed464board3.jpg" width="640"/>
 
