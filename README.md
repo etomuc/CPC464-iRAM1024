@@ -10,7 +10,10 @@ Legacy software that supports the DK'Tronics memory standard will be able to acc
 
 > [!IMPORTANT]
 > This version will properly work only in the Amstrad CPC 464 and 664. It will not work in the Amstrad Plus and GX4000 models and can potentially cause harm to them.
->
+> 
+> The PCB was designed so it fits into all known variations of the 464 and 664. It has been confirmed to fit into the 664, 464 motherboard version 1,2 and 3. On board revision 3 it can be necessary to bent the GateArray cooling plate slightly (see below). 
+> A final confirmation that it also fits 464 version 4 (cost reduced with ASIC) is still pending as I don't own that one and couldn't source it yet. Please let me know if you can confirm that it fits/doesn't fit this version.
+> 
 > It also won't fit into the CPC6128 but there is a special CPC6128 version (iRAM/640 and also iRAM/1088). See other projects on this Github profile. 
 
 ## Variations
