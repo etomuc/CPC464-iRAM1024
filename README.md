@@ -168,6 +168,17 @@ If you are not using sockets, solder all ICs first, then the CPU socket. If you 
 
 If you have been using sockets not put the new ICs into their respective sockets (except for CPU). 
 
+### Variations
+
+#### 640K - SRAM 512k + SRAM 128k
+If you install a 128K SRAM in the lower SRAM slot you need to cut the bridge (1) and add a 10k or 4.7k resistor (2) on the backside of the PCB. The iRAM will then provide 640K of total RAM incl. C3 support. 
+<img src="/pictures/variation640k.jpg" width="640"/>
+
+#### 576K - SRAM 512k
+If you install only a single 512k SRAM in the upper SRAM slot and leave the lower SRAM empty you need to close all LK bridges on the backside of the PCB. The iRAM will then provide a total of 576k of RAM *without* C3 support. 
+
+<img src="/pictures/variation576k.jpg" width="640"/>
+
 ## Installation
 
 Gently remove the CPU from its socket on the CPC motherboard.
@@ -202,12 +213,6 @@ If your CPC 464 has [motherboard revision 3](https://www.cpcwiki.eu/index.php/Ma
 The board will fit into the CPC 664 without modifications.
 
 <img src="/pictures/installed664.jpg" width="640"/>
-
-
-
-
-
-## Variations
 
 ## Thanks
 
