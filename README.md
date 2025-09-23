@@ -123,7 +123,6 @@ List for 1024MB version. Please adjust the components if you plan to build the 6
 
 ### PCB
 
-TODO: Update
 Order PCB here: https://www.pcbway.com/project/shareproject/CPC_iRAM_1024_1MB_internal_RAM_expansion_for_the_Amstrad_CPC_464_and_664_9310ac8d.html
 
 or use the Gerber files from the files folder to order from your preferred PCB manufacturer. 
@@ -132,7 +131,7 @@ or use the Gerber files from the files folder to order from your preferred PCB m
 
 Preparations:
 
-1) Some pin headers (thosw without round pins) usually need to be adjusted slightly as one side of the pin headers is too short and the other too long. You can move the plastic bar with e.g. pliers easily. Move them until the plastic bar almost reaches the mid of the pin header. One side should be slightly shorter than the other side. The short side will be the one that is later plugged into the CPU socket on the motherboard.
+1) If you use normal pin headers (not recommended) instead of precise pin headers they usually need to be adjusted slightly as one side of the pin headers is too short and the other too long. You can move the plastic bar with e.g. pliers easily. Move them until the plastic bar almost reaches the mid of the pin header. One side should be slightly shorter than the other side. The short side will be the one that is later plugged into the CPU socket on the motherboard.
 
 2) Program the ATF16V8 CPLDs with your programmer. Make sure to mark each one so you can later identify PAL1, PAL2 and PAL3.
 
