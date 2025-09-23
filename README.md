@@ -89,7 +89,7 @@ For a full assembly you need
 | optional:<br>IC socket 32pin <sup>**</sup> | 737-ICS-632-T | x2 |
 | optional:<br>IC socket 20pin <sup>**</sup> | 737-ICS-320-T | x3 |
 | optional:<br>IC socket 16pin | 737-ICS-316-T | x1 |
-| Pin Header 1x20 | e.g. 517-2320-6121 (normal)<br>or  200-TS120TAA (precise)| x2 |
+| Pin Header 1x20 | e.g. 200-TS120TAA (precise)| x2 |
 | optional:<br>Pin Header 1x2 angled<br>or JST XH 2.5mm Pin male right angle| 538-90121-0122 <br>JST: 306-S2B-XH-ALFSN | x1 |
 
 <sup>\*: AS6C4008 or compatible. If you are building the 640K version, the second SRAM can be a AS6C1008 (or compatible). If you are building the 576K version, the second SRAM is not needed. </sup>
