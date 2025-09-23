@@ -124,7 +124,7 @@ List for 1024MB version. Please adjust the components if you plan to build the 6
 ### PCB
 
 TODO: Update
-Order PCB here: https://www.pcbway.com/project/shareproject/CPC_iRAM640_internal_RAM_expansion_for_the_Amstrad_CPC_6128_5a46d826.html
+Order PCB here: https://www.pcbway.com/project/shareproject/CPC_iRAM_1024_1MB_internal_RAM_expansion_for_the_Amstrad_CPC_464_and_664_9310ac8d.html
 
 or use the Gerber files from the files folder to order from your preferred PCB manufacturer. 
 
