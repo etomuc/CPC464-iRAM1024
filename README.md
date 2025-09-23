@@ -107,7 +107,7 @@ List for 1024MB version. Please adjust the components if you plan to build the 6
 > [!IMPORTANT]
 > Make sure to buy all ICs in DIP format.
 >
-> 1x20 Pin Header: normal pin headers put some strain on the socket. Especially if you plan to remove the expansion again, consider the precise pin headers. However those break more easily, especially when not put into the socket gently and straight. 
+> 1x20 Pin Header: normal pin headers put some strain on the socket which could end in a socket that can no longer hold the plain CPU. Especially if you plan to remove the expansion again, make sure to use precise pin headers. However those break more easily, especially when not put into the socket gently and straight. 
 
 <img src="/pictures/build1.jpg" width="640"/>
 
