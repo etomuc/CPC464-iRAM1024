@@ -51,6 +51,11 @@ It is released under the CC BY-NC-ND 4.0 license with the following exception: C
 
 There is no official support. If you have any questions feel free to join the "Technical support - Hardware related" board on the cpcwiki.eu forum.
 
+### Known issues
+
+- In some CPC 464 (motherboard rev. 3 with GateArray 40007 fitted)the heat sink of the Gate Array might block the installation. The heat sink needs to be bent or replaced. See below for details.
+- On beta tester reported crashes in BATMAN demo. These could be resolved with a different CPU. It has not been clear what has caused the issue. It might be due to lack of power through the CPU socket. If you experience the issue try cleaning the CPU socket and properly placing the iRAM into the socket to limit resistance. If this won't help replace the 22uF cap with a 47uF cap and/or connect the spare 5V/GND pins (bottom left side of the PCB) to a 5V and GND pin on the motherboard. Please reach out via "Issues" or the CPC Wiki if you experience the issue and share if/how you could solve it. 
+  
 ## Building the expansion
 
 For a full assembly you need 
@@ -83,7 +88,7 @@ For a full assembly you need
 | 74HCT174 or 74LS174 | 595-CD74HCT174E | x1 |
 | AS6C4008-55 <sup>*</sup> | 913-AS6C4008-55PIN | x2 |
 | Capacitor 100nF 104 2.56mm | 581-AR155C104K4R | x6 |
-| Capacitor 10uF (or 22uF) - 2.0mm | e.g. 598-106SVF025M  | x1 |
+| Capacitor 22uF - 2.0mm | e.g. 598-106SVF025M  | x1 |
 | Resistor 10k<sup>***</sup><br>(4k7 will also be fine) | | x1 |
 | IC socket 40pin | 737-ICS-640-T | x1 |
 | optional:<br>IC socket 32pin <sup>**</sup> | 737-ICS-632-T | x2 |
@@ -119,7 +124,7 @@ List for 1024MB version. Please adjust the components if you plan to build the 6
 6. Resistor 10k or 4.7k
 7. IC Socket 40pin
 8. 2x Pin Header 1x20 (2.54mm)
-9. Cap 22uF or 10uF, 2.5mm, height: 5-7mm
+9. Cap 22uF, 2mm
 
 ### PCB
 
