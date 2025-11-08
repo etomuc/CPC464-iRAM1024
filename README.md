@@ -218,3 +218,8 @@ The board will fit into the CPC 664 without modifications.
 
 <img src="/pictures/installed664.jpg" width="640"/>
 
+## Thanks
+
+Special thanks go to
+- Revaldinho - [your solution](https://github.com/revaldinho/cpc_ram_expansion/wiki/Universal-Amstrad-CPC-RAM-Card) to implement C3 via shadowing on your external card inspired the C3 solution implemented here
+- Prodatron - SymbOS is probably THE reason to have 1MB in a CPC 
