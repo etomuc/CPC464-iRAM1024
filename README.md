@@ -1,5 +1,8 @@
 # CPC464 iRAM/1024
 
+> [!TIP]
+> PCBs can be ordered at [PCBWay](https://www.pcbway.com/project/shareproject/CPC_iRAM_1024_1MB_internal_RAM_expansion_for_the_Amstrad_CPC_464_and_664_9310ac8d.html) with a few clicks. Recommended PCB thickness is 1.2mm.
+
 The iRAM/1024 is an internal RAM expansion for the Amstrad CPC 464 and CPC 664 which upgrades the computer to a total of 1024KB - sixteen times the amount of the original 64KB. 
 
 It also support [C3 paging mode](http://norecess.cpcscene.net/advancedmemoryusage.html) which allows you to run CP/M plus, FutureOS or some games and demos with C3 requirement (e.g Pac-Man emulator or the demos PHX and Phortem).
@@ -84,7 +87,7 @@ For a full assembly you need
 
 | Part | Mouser No. (example, not verified yet) | Quantity |
 | --- | --- | --- |
-| PCB | n/a | x1 |
+| PCB (thickness: 1.2mm) | n/a | x1 |
 | ATF16V8 <sup>**</sup> | 556-AF16V8B15PU | x3 |
 | 74HCT174 or 74LS174 | 595-CD74HCT174E | x1 |
 | AS6C4008-55 <sup>*</sup> | 913-AS6C4008-55PIN | x2 |
@@ -117,7 +120,7 @@ List for 1024MB version. Please adjust the components if you plan to build the 6
 
 <img src="/pictures/build1.jpg" width="640"/>
 
-1. PCB
+1. PCB 
 2. 2x SRAM AS6C4008 (DIP)
 3. 6x Cap 100nF 104 2.5mm
 4. 3x ATF16V8 (DIP)
@@ -132,6 +135,8 @@ List for 1024MB version. Please adjust the components if you plan to build the 6
 Order PCB here: https://www.pcbway.com/project/shareproject/CPC_iRAM_1024_1MB_internal_RAM_expansion_for_the_Amstrad_CPC_464_and_664_9310ac8d.html
 
 or use the Gerber files from the files folder to order from your preferred PCB manufacturer. 
+
+Recommended thickness is 1.2mm.
 
 ### Assembly
 
