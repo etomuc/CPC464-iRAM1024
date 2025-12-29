@@ -169,6 +169,8 @@ On top add all remaining components. If you are not using sockets, solder all IC
 
 <img src="/pictures/build3.jpg" width="640"/>
 
+If you want to be able to disable the iRAM manually you can solder a pin header to the DIS labeled connections and attach a switch to it which can be placed outside of the computer.
+
 <sup>In case you are assembling the 576K version with a single SRAM you can leave out the sockets/ICs for PAL3 and SRAM2. However if you are using sockets it's recommended to fit them now for an easier, later upgrade.</sup> 
 
 > [!IMPORTANT]
