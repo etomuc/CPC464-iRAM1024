@@ -1,7 +1,17 @@
 # CPC464 iRAM/1024
 
+> [!IMPORTANT]
+>**An incompatibility with the M4 board has been reported. This PCB version will NOT work with the M4 without manual modifications.**
+> See Issues for link to more details. 
+>**Do not build this version if you are planning on using it with the M4.**
+>
+> At the moment the issue seems to be limited to M4 only but the root cause has not been identified yet.
+
+
+<!--
 > [!TIP]
 > PCBs can be ordered at [PCBWay](https://www.pcbway.com/project/shareproject/CPC_iRAM_1024_1MB_internal_RAM_expansion_for_the_Amstrad_CPC_464_and_664_9310ac8d.html) with a few clicks. Recommended PCB thickness is 1.2mm.
+-->
 
 The iRAM/1024 is an internal RAM expansion for the Amstrad CPC 464 and CPC 664 which upgrades the computer to a total of 1024KB - sixteen times the amount of the original 64KB. 
 
@@ -12,7 +22,6 @@ It also support [C3 paging mode](http://norecess.cpcscene.net/advancedmemoryusag
 Legacy software that supports the DK'Tronics memory standard will be able to access up to 576K of RAM ([the maximum suppored by DK'Tronics](https://www.cpcwiki.eu/index.php/Standard_Memory_Expansions#Standard_128K-512K_Expansions_.28dk.27tronics.2Fdobbertin-style.29)). More recent software, like e.g. SymbOS, with support for the [enhanced Yarek/RAM7 standard](https://www.cpcwiki.eu/index.php/Standard_Memory_Expansions#Extended_1M-4M_Expansions_.28RAM7.2FYarek-style.29) will see the full 1024K. 
 
 > [!IMPORTANT]
->**An incompatibility with the M4 board has been reported. It's not clear yet if this can be resolved.**
 > 
 > This version will properly work only in the Amstrad CPC 464 and 664. It will not work in the Amstrad Plus and GX4000 models and can potentially cause harm to them.
 > 
@@ -58,7 +67,7 @@ There is no official support. If you have any questions feel free to join the "T
 
 ### Known issues
 
-- **An incompatibility with the M4 board has been reported. It's not clear yet if this can be resolved.**
+- **An incompatibility with the M4 board has been reported.**
 - In some CPC 464 (motherboard rev. 3 with GateArray 40007 fitted)the heat sink of the Gate Array might block the installation. The heat sink needs to be bent or replaced. See below for details.
 - On beta tester reported crashes in BATMAN demo. These could be resolved with a different CPU. It has not been clear what has caused the issue. It might be due to lack of power through the CPU socket. If you experience the issue try cleaning the CPU socket and properly placing the iRAM into the socket to limit resistance. If this won't help replace the 22uF cap with a 47uF cap and/or connect the spare 5V/GND pins (bottom left side of the PCB) to a 5V and GND pin on the motherboard. Please reach out via "Issues" or the CPC Wiki if you experience the issue and share if/how you could solve it.
 - Not really an issue but working as designed: the upper most 64K of the secondary SRAM are used for C3 emulation and are not available for applications or programs. Software therefore can access 64K base RAM + 960K expanded RAM (not 1024K). Properly designed software like SymbOS that tests the availability of RAM banks before using them will not be impacted but if software just assumes that a full 1024K of expansion RAM are present they might experience crashes once software accesses this RAM area. As that much RAM is only used by a few tech demos, FutureOS and SymbOS, the real world relevance is negligible, especially since SymbOS is limited to a total memory size of 1MB and won't be able to use the upper most 64K anyway. If there is demand for a full 1024K of expanded memory I can provide a JED to replace the third GAL chip which removes C3 support and enables access to the full 1024K of expanded RAM. 
