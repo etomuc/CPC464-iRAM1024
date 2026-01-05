@@ -5,7 +5,7 @@
 > See Issues for link to more details. 
 >**Do not build this version if you are planning on using it with the M4.**
 >
-> At the moment the issue seems to be limited to M4 only but the root cause has not been identified yet.
+> At the moment the issue seems to be limited to M4 only. The root cause has not been identified yet but seems to origin from the M4s internal implementation.
 
 
 <!--
