@@ -3,7 +3,7 @@
 > [!IMPORTANT]
 >**An incompatibility with the M4 board has been reported. This PCB version will NOT work with the M4 without manual modifications.**
 > See end of this page for how to apply a patch to use this version with the M4.
->**Gerbers are no longer available. A new version of the PCB will be released in a few weeks after more testing.**
+>**Gerbers are no longer available. A new version of the PCB will be released in a few weeks after the new PCB revision has been tested.**
 
 <!--
 > [!TIP]
@@ -256,7 +256,7 @@ Green arrows:
 3) connect pin 5 from the upper SRAM to the lower SRAM (A15 signal for the SRAM)
 4) connect from L4 to the 640K option resistor soldering point (feed A15 signal from CPU into PAL3 instead of the 640K option selection)
 
-PAL2 and PAL3 need to be reprogrammed with the respective JED files (PAL2_M4patch.jed and PAL3_M4patch.jed).
+PAL2 and PAL3 need to be (re)programmed with the respective JED files (464iRAM_1024_PAL2_m4patch.jed and 464iRAM_1024_PAL3_m4patch.jed).
 
 This modification removes the 640K option, so you either have to use two 512K SRAMs for 1024K or a single 512K SRAM for 576K (without C3 support). 
 For 576K now all 3 PAL will be required and all LK links need to be open. 
