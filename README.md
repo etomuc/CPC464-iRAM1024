@@ -1,12 +1,9 @@
-# CPC464 iRAM/1024
+# CPC464 iRAM/1024 (Revision 1)
 
 > [!IMPORTANT]
 >**An incompatibility with the M4 board has been reported. This PCB version will NOT work with the M4 without manual modifications.**
-> See Issues for link to more details. 
->**Do not build this version if you are planning on using it with the M4.**
->
-> At the moment the issue seems to be limited to M4 only. The root cause has not been identified yet but seems to origin from the M4s internal implementation.
-
+> See end of this page for how to apply a patch to use this version with the M4.
+>**Gerbers are no longer available. A new version of the PCB will be released in a few weeks after more testing.**
 
 <!--
 > [!TIP]
@@ -67,7 +64,7 @@ There is no official support. If you have any questions feel free to join the "T
 
 ### Known issues
 
-- **An incompatibility with the M4 board has been reported.**
+- **An incompatibility with the M4 board has been reported. See and of this page for how to apply a patch.**
 - In some CPC 464 (motherboard rev. 3 with GateArray 40007 fitted)the heat sink of the Gate Array might block the installation. The heat sink needs to be bent or replaced. See below for details.
 - On beta tester reported crashes in BATMAN demo. These could be resolved with a different CPU. It has not been clear what has caused the issue. It might be due to lack of power through the CPU socket. If you experience the issue try cleaning the CPU socket and properly placing the iRAM into the socket to limit resistance. If this won't help replace the 22uF cap with a 47uF cap and/or connect the spare 5V/GND pins (bottom left side of the PCB) to a 5V and GND pin on the motherboard. Please reach out via "Issues" or the CPC Wiki if you experience the issue and share if/how you could solve it.
 - Not really an issue but working as designed: the upper most 64K of the secondary SRAM are used for C3 emulation and are not available for applications or programs. Software therefore can access 64K base RAM + 960K expanded RAM (not 1024K). Properly designed software like SymbOS that tests the availability of RAM banks before using them will not be impacted but if software just assumes that a full 1024K of expansion RAM are present they might experience crashes once software accesses this RAM area. As that much RAM is only used by a few tech demos, FutureOS and SymbOS, the real world relevance is negligible, especially since SymbOS is limited to a total memory size of 1MB and won't be able to use the upper most 64K anyway. If there is demand for a full 1024K of expanded memory I can provide a JED to replace the third GAL chip which removes C3 support and enables access to the full 1024K of expanded RAM. 
@@ -195,10 +192,16 @@ If you have been using sockets not put the new ICs into their respective sockets
 ### Variations
 
 #### 640K - SRAM 512k + SRAM 128k
+
+*Update: Do not build this variation as it won't be compatible with the M4 patch (see end of this page).*
+
 If you install a 128K SRAM in the lower SRAM slot you need to cut the bridge (1) and add a 10k or 4.7k resistor (2) on the backside of the PCB. The iRAM will then provide 640K of total RAM incl. C3 support. 
 <img src="/pictures/variation640k.jpg" width="640"/>
 
 #### 576K - SRAM 512k
+
+*Update: When applying the M4 patch, please only follow the instructions in the last section of this page. Do not close the LK-bridges!*
+
 If you install only a single 512k SRAM in the upper SRAM slot and leave the lower SRAM empty you need to close all LK bridges on the backside of the PCB. The iRAM will then provide a total of 576k of RAM *without* C3 support. 
 
 <img src="/pictures/variation576k.jpg" width="640"/>
@@ -237,6 +240,26 @@ If your CPC 464 has [motherboard revision 3](https://www.cpcwiki.eu/index.php/Ma
 The board will fit into the CPC 664 without modifications.
 
 <img src="/pictures/installed664.jpg" width="640"/>
+
+## Modification for M4 incompatibility 
+
+An incompatibility with the M4 board has been reported. This PCB version will only work fully with the M4 expansion with the following modifications:
+
+<img src="/pictures/iRAM_rev1_m4patch.jpg" width="1024"/>
+
+Red arrows in the picture:
+1) cut the lane from A15 on the CPU socket to the lower SRAM - it's the lane that goes straight through the (i)
+2) cut the lane between the soldering pads for the 640k option
+
+Green arrows:
+
+3) connect pin 5 from the upper SRAM to the lower SRAM (A15 signal for the SRAM)
+4) connect from L4 to the 640K option resistor soldering point (feed A15 signal from CPU into PAL3 instead of the 640K option selection)
+
+PAL2 and PAL3 need to be reprogrammed with the respective JED files (PAL2_M4patch.jed and PAL3_M4patch.jed).
+
+This modification removes the 640K option, so you either have to use two 512K SRAMs for 1024K or a single 512K SRAM for 576K (without C3 support). 
+For 576K now all 3 PAL will be required and all LK links need to be open. 
 
 ## Thanks
 
