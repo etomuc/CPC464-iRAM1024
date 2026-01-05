@@ -150,9 +150,9 @@ Preparations:
 
 **Step 1:**
 
-On the bottom side of the PCB add the pin header and the 10K resistor on the right hand side (picture update pending). 
+On the bottom side of the PCB add the pin headers. 
 
-<img src="/pictures/build2.jpg" width="640"/>
+<img src="/pictures/build2-rev2.jpg" width="640"/>
 
 > [!TIP]
 > To easily align the pin headers you can insert them into the CPU socket before soldering. This keeps them nicely in place and aligned.
@@ -161,7 +161,7 @@ Cut the pins of the pin header on the top of the PCB closely to the PCBs surface
 
 **Step 2:**
 
-On top add all remaining components. If you are not using sockets, solder all ICs first, then the CPU socket. If you are using sockets for all ICs, just solder all sockets. Capacitors come last.
+On top add all remaining components. If you are not using sockets, solder all ICs first, then the CPU socket. If you are using sockets for all ICs, just solder all sockets. Resistor and capacitors come last.
 
 <img src="/pictures/build3.jpg" width="640"/>
 
