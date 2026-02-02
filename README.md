@@ -161,7 +161,7 @@ On the bottom side of the PCB add the pin headers.
 <img src="/pictures/build2_rev2.jpeg" width="640"/>
 
 > [!TIP]
-> To easily align the pin headers you can insert them into the CPU socket before soldering. This keeps them nicely in place and aligned.
+> To easily align the pin headers you can insert them into a breadboard before soldering. This keeps them nicely in place and aligned. If you don't have a breadbord you can also use the CPU socket (but it won't keep them as perfectly aligned as a breadboard). 
 
 Cut the pins of the pin header on the top of the PCB closely to the PCBs surface.
 
