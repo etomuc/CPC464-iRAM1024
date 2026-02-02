@@ -1,4 +1,4 @@
-# CPC464 iRAM/1024
+# CPC464 iRAM/1024 (revision 2)
 
 > [!IMPORTANT]
 >**An incompatibility with the M4 board of the initital release of the iRAM/1024 has been reported. This has been fixed with this new revision. If you built the initital version it's possible to apply some small modifications to make it compatible with the M4.**
