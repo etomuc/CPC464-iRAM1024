@@ -1,9 +1,10 @@
-# CPC464 iRAM/1024 (Revision 1)
+# CPC464 iRAM/1024
 
 > [!IMPORTANT]
->**An incompatibility with the M4 board has been reported. This PCB version will NOT work with the M4 without manual modifications.**
-> See end of this page for how to apply a patch to use this version with the M4.
->**Gerbers are no longer available. A new version of the PCB will be released in a few weeks after the new PCB revision has been tested.**
+>**An incompatibility with the M4 board of the initital release of the iRAM/1024 has been reported. This has been fixed with this new revision. If you built the initital version it's possible to apply some small modifications to make it compatible with the M4.**
+> See  [the README of rev1](README_rev1.md) for more details. 
+
+
 
 <!--
 > [!TIP]
@@ -12,7 +13,7 @@
 
 The iRAM/1024 is an internal RAM expansion for the Amstrad CPC 464 and CPC 664 which upgrades the computer to a total of 1024KB - sixteen times the amount of the original 64KB. 
 
-It also support [C3 paging mode](http://norecess.cpcscene.net/advancedmemoryusage.html) which allows you to run CP/M plus, FutureOS or some games and demos with C3 requirement (e.g Pac-Man emulator or the demos PHX and Phortem).
+It even supports [C3 paging mode](http://norecess.cpcscene.net/advancedmemoryusage.html) which allows you to run CP/M plus, FutureOS or some games and demos with C3 requirement (e.g Pac-Man emulator or the demos PHX and Phortem).
 
 <img src="/pictures/installed464board1.jpg" width="640"/>
 
@@ -31,13 +32,13 @@ Legacy software that supports the DK'Tronics memory standard will be able to acc
 
 The same PCB supports 3 RAM configurations: 
 
-- total of 1024K RAM (the primary config): 2x 512K SRAM, C3 support
-- total of 640K RAM: 1x 512K SRAM + 1x 128K SRAM, total 640K RAM, C3 support
-- total of 576K, 1x 512K SRAM, <b>no C3</b>
+- total of 1024K RAM (64K base + 960K extended memory): 2x 512K SRAM, C3 support <b>recommended config<sup>*</sup></b>
+- total of 1088K RAM (64K base + 1024K extended memory): 2x 512K SRAM, <b>no C3</b>
+- total of 576K RAM (64K base + 512K extended memory), 1x 512K SRAM, <b>no C3</b>
 
-<sup>For the 640K version a small cut has to be made on the bottom of the PCB (clearly indicated) and a second resistor is required. For the 576K version you just need to close some bridges on the PCB and can save a few € as you only need 1 SRAM and 2 CPLD ICs.</sup>
-
-(Personal comment: The 640K actually only makes sense if you have a 128K SRAM lying around. Otherwise the price difference between 512K and 128K is negligible.) 
+Due to a lack of pins of the CPLDs this cannot be selected and the CPLDs need to be programmed for either C3 or non-C3 support. 
+ 
+<sup>*: If there is no specific need to avoid C3 or to have the full 1024 of expanded RAM this is probably the best config as it enables optimal 6128 compatibility. Some tech demos might that do not test for available RAM blocks and simply expect the full SRAM to be available might have issues though.</sup>
 
 ## Goals
 
@@ -64,10 +65,9 @@ There is no official support. If you have any questions feel free to join the "T
 
 ### Known issues
 
-- **An incompatibility with the M4 board has been reported. See and of this page for how to apply a patch.**
-- In some CPC 464 (motherboard rev. 3 with GateArray 40007 fitted)the heat sink of the Gate Array might block the installation. The heat sink needs to be bent or replaced. See below for details.
+- In some CPC 464 (motherboard rev. 3 with GateArray 40007 fitted) the heat sink of the Gate Array might block the installation. The heat sink needs to be bent or replaced. See below for details.
 - On beta tester reported crashes in BATMAN demo. These could be resolved with a different CPU. It has not been clear what has caused the issue. It might be due to lack of power through the CPU socket. If you experience the issue try cleaning the CPU socket and properly placing the iRAM into the socket to limit resistance. If this won't help replace the 22uF cap with a 47uF cap and/or connect the spare 5V/GND pins (bottom left side of the PCB) to a 5V and GND pin on the motherboard. Please reach out via "Issues" or the CPC Wiki if you experience the issue and share if/how you could solve it.
-- Not really an issue but working as designed: the upper most 64K of the secondary SRAM are used for C3 emulation and are not available for applications or programs. Software therefore can access 64K base RAM + 960K expanded RAM (not 1024K). Properly designed software like SymbOS that tests the availability of RAM banks before using them will not be impacted but if software just assumes that a full 1024K of expansion RAM are present they might experience crashes once software accesses this RAM area. As that much RAM is only used by a few tech demos, FutureOS and SymbOS, the real world relevance is negligible, especially since SymbOS is limited to a total memory size of 1MB and won't be able to use the upper most 64K anyway. If there is demand for a full 1024K of expanded memory I can provide a JED to replace the third GAL chip which removes C3 support and enables access to the full 1024K of expanded RAM. 
+- Not really an issue but working as designed: With C3 emulation active the upper most 64K of the secondary SRAM are used for said C3 emulation and are not available for applications or programs. Software therefore can access 64K base RAM + 960K expanded RAM (not 1024K). Properly designed software like SymbOS that tests the availability of RAM banks before using them will not be impacted but if software just assumes that a full 1024K of expansion RAM are present they might experience crashes once software accesses this RAM area. As that much RAM is only used by a few tech demos, FutureOS and SymbOS, the real world relevance is negligible, especially since SymbOS is limited to a total memory size of 1MB and won't be able to use the upper most 64K anyway. If it's relevant to have the full 1024K just use the alternative JED file for PAL3 which removes C3 emulation but gives access to the full 1024K.
   
 ## Building the expansion
 
@@ -97,47 +97,46 @@ For a full assembly you need
 | Part | Mouser No. (example, not verified yet) | Quantity |
 | --- | --- | --- |
 | PCB (thickness: 1.2mm) | n/a | x1 |
-| ATF16V8 <sup>**</sup> | 556-AF16V8B15PU | x3 |
+| ATF16V8 | 556-AF16V8B15PU | x3 |
 | 74HCT174 or 74LS174 | 595-CD74HCT174E | x1 |
 | AS6C4008-55 <sup>*</sup> | 913-AS6C4008-55PIN | x2 |
 | Capacitor 100nF 104 2.54mm | 581-AR155C104K4R | x6 |
 | Capacitor 22uF - 2.0mm | e.g. 598-106SVF025M  | x1 |
-| Resistor 10k<sup>***</sup><br>(4k7 will also be fine) | | x1 |
+| Resistor 10k or 4k7 | | x1 |
 | IC socket 40pin | 737-ICS-640-T | x1 |
-| optional:<br>IC socket 32pin <sup>**</sup> | 737-ICS-632-T | x2 |
-| optional:<br>IC socket 20pin <sup>**</sup> | 737-ICS-320-T | x3 |
-| optional:<br>IC socket 16pin | 737-ICS-316-T | x1 |
+| optional (but recommended):<br>IC socket 32pin <sup>**</sup> | 737-ICS-632-T | x2 |
+| optional (but recommended):<br>IC socket 20pin <sup>**</sup> | 737-ICS-320-T | x3 |
+| optional (but recommended):<br>IC socket 16pin | 737-ICS-316-T | x1 |
 | Pin Header 1x20 | e.g. 200-TS120TAA (precise)| x2 |
 | optional:<br>Pin Header 1x2 angled<br>or JST XH 2.5mm Pin male right angle| 538-90121-0122 <br>JST: 306-S2B-XH-ALFSN | x1 |
 
-<sup>\*: AS6C4008 or compatible. If you are building the 640K version, the second SRAM can be a AS6C1008 (or compatible). If you are building the 576K version, the second SRAM is not needed. </sup>
-
-<sup>\**: If you are building the 576K version only 2x ATF16V8, 1x 32pin socket and 2x 20pin socket is required. However it's still recommended to populate the sockets to ensure an easy upgrade later.</sup>
-
-<sup>\***: 2x resistor if you are building the 640K version</sup> 
-
+<sup>\*: AS6C4008 or compatible. If you are building the 576K version, only a single SRAM is needed. </sup>
 
 Order List from Reichelt/Germany: https://www.reichelt.de/my/2256222 (list not verfified yet, please let me know if this works out for you).
 
-List for 1024MB version. Please adjust the components if you plan to build the 640K or 576K version. 
-​ 
 
 > [!IMPORTANT]
 > Make sure to buy all ICs in DIP format.
 >
 > 1x20 Pin Header: normal pin headers put some strain on the socket which could end in a socket that can no longer hold the plain CPU. Especially if you plan to remove the expansion again, make sure to use precise pin headers. However those break more easily, especially when not put into the socket gently and straight. 
 
-<img src="/pictures/build1.jpg" width="640"/>
+<img src="/pictures/build1_rev2.jpeg" width="640"/>
 
 1. PCB 
 2. 2x SRAM AS6C4008 (DIP)
-3. 6x Cap 100nF 104 2.5mm
+3. 74HCT174 or 74LS174
 4. 3x ATF16V8 (DIP)
-5. 74HCT174 or 74LS174
-6. Resistor 10k or 4.7k
-7. IC Socket 40pin
+5. Resistor 10k or 4.7k
+6. Cap 22uF, 2mm
+7. 6x Cap 100nF 104 2.5mm
 8. 2x Pin Header 1x20 (2.54mm)
-9. Cap 22uF, 2mm
+9. IC Socket 40pin
+10. 2x IC Socket 32pin
+11. 3x IC Socket 20pin
+12. IC Socket 16pin
+13. Standoff (3D printed)
+
+<sup>10-13: optional</sup>
 
 ### PCB
 
@@ -155,17 +154,11 @@ Preparations:
 
 2) Program the ATF16V8 CPLDs with your programmer. Make sure to mark each one so you can later identify PAL1, PAL2 and PAL3.
 
-<sup>In case you are assembling the 576K version with a single SRAM you don't need PAL3.</sup> 
-
 **Step 1:**
 
-On the bottom side of the PCB add the pin header and the 10K resistor on the right hand side (picture update pending). 
+On the bottom side of the PCB add the pin headers. 
 
-<img src="/pictures/build2.jpg" width="640"/>
-
-<sup>In case you are assembling the 640K version make sure to cut the trace at the indicated position and add the additional 10K resistor.</sup> 
-
-<sup>In case you are assembling the 576K version with a single SRAM make sure to close all the L-bridges (L1 to L4).</sup>
+<img src="/pictures/build2_rev2.jpeg" width="640"/>
 
 > [!TIP]
 > To easily align the pin headers you can insert them into the CPU socket before soldering. This keeps them nicely in place and aligned.
@@ -174,9 +167,9 @@ Cut the pins of the pin header on the top of the PCB closely to the PCBs surface
 
 **Step 2:**
 
-On top add all remaining components. If you are not using sockets, solder all ICs first, then the CPU socket. If you are using sockets for all ICs, just solder all sockets. Capacitors come last.
+On top add all remaining components. If you are not using sockets, solder all ICs first, then the CPU socket. If you are using sockets for all ICs, just solder all sockets. Resistor and capacitors come last.
 
-<img src="/pictures/build3.jpg" width="640"/>
+<img src="/pictures/build3_rev2.jpeg" width="640"/>
 
 If you want to be able to disable the iRAM manually you can solder a pin header to the DIS labeled connections and attach a switch to it which can be placed outside of the computer.
 
@@ -187,24 +180,13 @@ If you want to be able to disable the iRAM manually you can solder a pin header 
 
 **Step 3:**
 
-If you have been using sockets not put the new ICs into their respective sockets (except for CPU). 
+If you have been using sockets finally put the ICs into their respective sockets (except for CPU). 
 
 ### Variations
 
-#### 640K - SRAM 512k + SRAM 128k
-
-*Update: Do not build this variation as it won't be compatible with the M4 patch (see end of this page).*
-
-If you install a 128K SRAM in the lower SRAM slot you need to cut the bridge (1) and add a 10k or 4.7k resistor (2) on the backside of the PCB. The iRAM will then provide 640K of total RAM incl. C3 support. 
-<img src="/pictures/variation640k.jpg" width="640"/>
-
-#### 576K - SRAM 512k
-
-*Update: When applying the M4 patch, please only follow the instructions in the last section of this page. Do not close the LK-bridges!*
-
-If you install only a single 512k SRAM in the upper SRAM slot and leave the lower SRAM empty you need to close all LK bridges on the backside of the PCB. The iRAM will then provide a total of 576k of RAM *without* C3 support. 
-
-<img src="/pictures/variation576k.jpg" width="640"/>
+#### 1088K / 576K - no C3
+Use the JED files with "no_C3" in the filename to program PAL 3. (PAL 1 ans PAL 2 will be identical for all variations.) 
+If you only want to use a single SRAM, leave SRAM socket 2 empty. You can upgrade any time to 1088K later without further modifications. 
 
 ## Installation
 
@@ -240,26 +222,6 @@ If your CPC 464 has [motherboard revision 3](https://www.cpcwiki.eu/index.php/Ma
 The board will fit into the CPC 664 without modifications.
 
 <img src="/pictures/installed664.jpg" width="640"/>
-
-## Modification for M4 incompatibility 
-
-An incompatibility with the M4 board has been reported. This PCB version will only work fully with the M4 expansion with the following modifications:
-
-<img src="/pictures/iRAM_rev1_m4patch.jpg" width="1024"/>
-
-Red arrows in the picture:
-1) cut the lane from A15 on the CPU socket to the lower SRAM - it's the lane that goes straight through the (i)
-2) cut the lane between the soldering pads for the 640k option
-
-Green arrows:
-
-3) connect pin 5 from the upper SRAM to the lower SRAM (A15 signal for the SRAM)
-4) connect from L4 to the 640K option resistor soldering point (feed A15 signal from CPU into PAL3 instead of the 640K option selection)
-
-PAL2 and PAL3 need to be (re)programmed with the respective JED files (464iRAM_1024_PAL2_m4patch.jed and 464iRAM_1024_PAL3_m4patch.jed).
-
-This modification removes the 640K option, so you either have to use two 512K SRAMs for 1024K or a single 512K SRAM for 576K (without C3 support). 
-For 576K now all 3 PAL will be required and all LK links need to be open. 
 
 ## Thanks
 
