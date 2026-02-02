@@ -67,7 +67,7 @@ There is no official support. If you have any questions feel free to join the "T
 
 - In some CPC 464 (motherboard rev. 3 with GateArray 40007 fitted) the heat sink of the Gate Array might block the installation. The heat sink needs to be bent or replaced. See below for details.
 - On beta tester reported crashes in BATMAN demo. These could be resolved with a different CPU. It has not been clear what has caused the issue. It might be due to lack of power through the CPU socket. If you experience the issue try cleaning the CPU socket and properly placing the iRAM into the socket to limit resistance. If this won't help replace the 22uF cap with a 47uF cap and/or connect the spare 5V/GND pins (bottom left side of the PCB) to a 5V and GND pin on the motherboard. Please reach out via "Issues" or the CPC Wiki if you experience the issue and share if/how you could solve it.
-- Not really an issue but working as designed: the upper most 64K of the secondary SRAM are used for C3 emulation and are not available for applications or programs. Software therefore can access 64K base RAM + 960K expanded RAM (not 1024K). Properly designed software like SymbOS that tests the availability of RAM banks before using them will not be impacted but if software just assumes that a full 1024K of expansion RAM are present they might experience crashes once software accesses this RAM area. As that much RAM is only used by a few tech demos, FutureOS and SymbOS, the real world relevance is negligible, especially since SymbOS is limited to a total memory size of 1MB and won't be able to use the upper most 64K anyway. If there is demand for a full 1024K of expanded memory I can provide a JED to replace the third GAL chip which removes C3 support and enables access to the full 1024K of expanded RAM. 
+- Not really an issue but working as designed: With C3 emulation active the upper most 64K of the secondary SRAM are used for said C3 emulation and are not available for applications or programs. Software therefore can access 64K base RAM + 960K expanded RAM (not 1024K). Properly designed software like SymbOS that tests the availability of RAM banks before using them will not be impacted but if software just assumes that a full 1024K of expansion RAM are present they might experience crashes once software accesses this RAM area. As that much RAM is only used by a few tech demos, FutureOS and SymbOS, the real world relevance is negligible, especially since SymbOS is limited to a total memory size of 1MB and won't be able to use the upper most 64K anyway. If it's relevant to have the full 1024K just use the alternative JED file for PAL3 which removes C3 emulation but gives access to the full 1024K.
   
 ## Building the expansion
 
@@ -120,17 +120,23 @@ Order List from Reichelt/Germany: https://www.reichelt.de/my/2256222 (list not v
 >
 > 1x20 Pin Header: normal pin headers put some strain on the socket which could end in a socket that can no longer hold the plain CPU. Especially if you plan to remove the expansion again, make sure to use precise pin headers. However those break more easily, especially when not put into the socket gently and straight. 
 
-<img src="/pictures/build1.jpg" width="640"/>
+<img src="/pictures/build1_rev2.jpeg" width="640"/>
 
 1. PCB 
 2. 2x SRAM AS6C4008 (DIP)
-3. 6x Cap 100nF 104 2.5mm
+3. 74HCT174 or 74LS174
 4. 3x ATF16V8 (DIP)
-5. 74HCT174 or 74LS174
-6. Resistor 10k or 4.7k
-7. IC Socket 40pin
+5. Resistor 10k or 4.7k
+6. Cap 22uF, 2mm
+7. 6x Cap 100nF 104 2.5mm
 8. 2x Pin Header 1x20 (2.54mm)
-9. Cap 22uF, 2mm
+9. IC Socket 40pin
+10. 2x IC Socket 32pin
+11. 3x IC Socket 20pin
+12. IC Socket 16pin
+13. Standoff (3D printed)
+
+<sup>10-13: optional</sup>
 
 ### PCB
 
@@ -152,7 +158,7 @@ Preparations:
 
 On the bottom side of the PCB add the pin headers. 
 
-<img src="/pictures/build2-rev2.jpg" width="640"/>
+<img src="/pictures/build2_rev2.jpeg" width="640"/>
 
 > [!TIP]
 > To easily align the pin headers you can insert them into the CPU socket before soldering. This keeps them nicely in place and aligned.
@@ -163,7 +169,7 @@ Cut the pins of the pin header on the top of the PCB closely to the PCBs surface
 
 On top add all remaining components. If you are not using sockets, solder all ICs first, then the CPU socket. If you are using sockets for all ICs, just solder all sockets. Resistor and capacitors come last.
 
-<img src="/pictures/build3.jpg" width="640"/>
+<img src="/pictures/build3_rev2.jpeg" width="640"/>
 
 If you want to be able to disable the iRAM manually you can solder a pin header to the DIS labeled connections and attach a switch to it which can be placed outside of the computer.
 
@@ -174,12 +180,12 @@ If you want to be able to disable the iRAM manually you can solder a pin header 
 
 **Step 3:**
 
-If you have been using sockets not put the new ICs into their respective sockets (except for CPU). 
+If you have been using sockets finally put the ICs into their respective sockets (except for CPU). 
 
 ### Variations
 
 #### 1088K / 576K - no C3
-Use the JED files with "no_C3" in the filename to program PAL 2 and PAL 3. (PAL 1 will be identical for all variations.) 
+Use the JED files with "no_C3" in the filename to program PAL 3. (PAL 1 ans PAL 2 will be identical for all variations.) 
 If you only want to use a single SRAM, leave SRAM socket 2 empty. You can upgrade any time to 1088K later without further modifications. 
 
 ## Installation
