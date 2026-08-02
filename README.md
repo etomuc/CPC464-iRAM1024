@@ -6,10 +6,10 @@
 
 
 
-<!--
+
 > [!TIP]
 > PCBs can be ordered at [PCBWay](https://www.pcbway.com/project/shareproject/CPC_iRAM_1024_1MB_internal_RAM_expansion_for_the_Amstrad_CPC_464_and_664_9310ac8d.html) with a few clicks. Recommended PCB thickness is 1.2mm.
--->
+
 
 The iRAM/1024 is an internal RAM expansion for the Amstrad CPC 464 and CPC 664 which upgrades the computer to a total of 1024KB - sixteen times the amount of the original 64KB. 
 
@@ -17,13 +17,13 @@ It even supports [C3 paging mode](http://norecess.cpcscene.net/advancedmemoryusa
 
 <img src="/pictures/installed464board1.jpg" width="640"/>
 
-Legacy software that supports the DK'Tronics memory standard will be able to access up to 576K of RAM ([the maximum suppored by DK'Tronics](https://www.cpcwiki.eu/index.php/Standard_Memory_Expansions#Standard_128K-512K_Expansions_.28dk.27tronics.2Fdobbertin-style.29)). More recent software, like e.g. SymbOS, with support for the [enhanced Yarek/RAM7 standard](https://www.cpcwiki.eu/index.php/Standard_Memory_Expansions#Extended_1M-4M_Expansions_.28RAM7.2FYarek-style.29) will see the full 1024K. 
+Legacy software that supports the DK'Tronics memory standard will be able to access up to 576K of RAM ([the maximum suppored by DK'Tronics](https://www.cpcwiki.eu/index.php/Standard_Memory_Expansions#Standard_128K-512K_Expansions_.28dk.27tronics.2Fdobbertin-style.29)). Modern software, like e.g. SymbOS, that support the [enhanced Yarek/RAM7 standard](https://www.cpcwiki.eu/index.php/Standard_Memory_Expansions#Extended_1M-4M_Expansions_.28RAM7.2FYarek-style.29) will see the full 1024K. 
 
 > [!IMPORTANT]
 > 
 > This version will properly work only in the Amstrad CPC 464 and 664. It will not work in the Amstrad Plus and GX4000 models and can potentially cause harm to them.
 > 
-> The PCB was designed so it fits into all known variations of the 464 and 664. It has been confirmed to fit into the 664, 464 motherboard version 1,2 and 3. On board revision 3 it can be necessary to bend the Gate Array cooling plate slightly (see below). 
+> The PCB was designed so it fits into all known variations of the 464 and 664. It has been confirmed to fit into the 664, 464 motherboard version 1,2 and 3. On board revision 3 it might be necessary to bend the Gate Array cooling plate slightly (see below). 
 > A final confirmation that it also fits 464 version 4 (cost reduced with ASIC) is still pending as I don't own that one and couldn't source it yet. Please let me know if you can confirm that it fits/doesn't fit this version.
 > 
 > It won't fit into the CPC 6128 due to space constraints in the 6128. There are two specific CPC6128 versions, iRAM/640 and iRAM/1088. See other projects on this Github profile. 
@@ -36,9 +36,9 @@ The same PCB supports 3 RAM configurations:
 - total of 1088K RAM (64K base + 1024K extended memory): 2x 512K SRAM, <b>no C3</b>
 - total of 576K RAM (64K base + 512K extended memory), 1x 512K SRAM, <b>no C3</b>
 
-Due to a lack of pins of the CPLDs this cannot be selected and the CPLDs need to be programmed for either C3 or non-C3 support. 
+Unfortunately there was not enough spare pins on the CPLDs to select this via jumpers. The CPLDs need to be programmed for either C3 or non-C3 support. 
  
-<sup>*: If there is no specific need to avoid C3 or to have the full 1024 of expanded RAM this is probably the best config as it enables optimal 6128 compatibility. Some tech demos might that do not test for available RAM blocks and simply expect the full SRAM to be available might have issues though.</sup>
+<sup>*: If there is no specific need to avoid C3 or to have the full 1024 of expanded RAM this is probably the best config as it enables optimal 6128 compatibility. Software that does not properly check the availabiity of RAM banks and simply expect the full 1024K to be present might have issues though.</sup>
 
 ## Goals
 
